@@ -70,7 +70,7 @@ export default function Home() {
               <Link href="#features" className="text-gray-400 hover:text-cyan-400 transition">Features</Link>
               <Link href="#education" className="text-gray-400 hover:text-cyan-400 transition">Education</Link>
               <Link href="#signals" className="text-gray-400 hover:text-cyan-400 transition">Signals</Link>
-              <Link href="#app" className="text-gray-400 hover:text-cyan-400 transition">Mobile App</Link>
+              <Link href="/pricing" className="text-gray-400 hover:text-cyan-400 transition">Pricing</Link>
             </div>
             <div className="hidden md:flex items-center gap-4">
               <Link href="/login" className="text-white hover:text-cyan-400 transition">Sign In</Link>
@@ -121,11 +121,11 @@ export default function Home() {
                 Signals
               </Link>
               <Link
-                href="#app"
+                href="/pricing"
                 className="block text-gray-400 hover:text-cyan-400 transition py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Mobile App
+                Pricing
               </Link>
               <div className="pt-4 border-t border-gray-800 space-y-3">
                 <Link
@@ -431,10 +431,10 @@ export default function Home() {
             <div>
               <h4 className="text-white font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-500 text-sm">
-                <li><Link href="/dashboard" className="hover:text-cyan-400 transition">Blog</Link></li>
+                <li><Link href="/pricing" className="hover:text-cyan-400 transition">Pricing</Link></li>
                 <li><Link href="/dashboard/courses" className="hover:text-cyan-400 transition">Tutorials</Link></li>
-                <li><Link href="/dashboard" className="hover:text-cyan-400 transition">FAQ</Link></li>
-                <li><Link href="/dashboard" className="hover:text-cyan-400 transition">Support</Link></li>
+                <li><Link href="/faq" className="hover:text-cyan-400 transition">FAQ</Link></li>
+                <li><Link href="/support" className="hover:text-cyan-400 transition">Support</Link></li>
               </ul>
             </div>
             <div>

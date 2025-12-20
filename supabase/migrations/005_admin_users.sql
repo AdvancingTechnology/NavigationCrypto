@@ -11,7 +11,8 @@ SET
   updated_at = NOW()
 WHERE email IN (
   'elijah@advancingtechnology.online',
-  'kingdomtrav1589@gmail.com'
+  'kingdomtrav1589@gmail.com',
+  'strunkxrp@proton.me'
 );
 
 -- Verify admin promotion (optional logging)
