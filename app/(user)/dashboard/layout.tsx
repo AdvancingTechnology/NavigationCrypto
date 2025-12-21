@@ -37,10 +37,11 @@ export default function DashboardLayout({
   const supabase = useMemo(() => createClient(), []);
   const [user, setUser] = useState<{ email?: string; full_name?: string } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLElement>(null);
 
-  // Close menu when clicking outside
+  // Close user menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -56,6 +57,28 @@ export default function DashboardLayout({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showMenu]);
+
+  // Close sidebar when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setSidebarOpen(false);
+      }
+    };
+
+    if (sidebarOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarOpen]);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -78,10 +101,26 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-black flex">
+      {/* Mobile Sidebar Backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-950 border-r border-gray-800 flex flex-col">
+      <aside
+        ref={sidebarRef}
+        className={`
+          fixed md:static inset-y-0 left-0 z-50
+          w-64 bg-gray-950 border-r border-gray-800 flex flex-col
+          transform transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}
+      >
         {/* Logo */}
-        <div className="p-6 border-b border-gray-800">
+        <div className="p-6 border-b border-gray-800 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-3">
             <GlobeIcon className="w-8 h-8" />
             <div>
@@ -89,6 +128,16 @@ export default function DashboardLayout({
               <div className="text-xs text-gray-500">Dashboard</div>
             </div>
           </Link>
+          {/* Close button for mobile */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="md:hidden text-gray-400 hover:text-white p-2"
+            aria-label="Close sidebar"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
         {/* Navigation */}
@@ -101,6 +150,7 @@ export default function DashboardLayout({
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={() => setSidebarOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
                       isActive
                         ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30"
@@ -129,13 +179,25 @@ export default function DashboardLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto" id="main-content">
+      <main className="flex-1 overflow-auto min-w-0" id="main-content">
         {/* Top Bar */}
-        <header className="h-16 bg-gray-950 border-b border-gray-800 flex items-center justify-between px-6">
-          <h1 className="text-white font-semibold">Dashboard</h1>
-          <div className="flex items-center gap-4">
+        <header className="h-16 bg-gray-950 border-b border-gray-800 flex items-center justify-between px-4 md:px-6">
+          <div className="flex items-center gap-3">
+            {/* Hamburger Menu Button - Only on mobile */}
             <button
-              className="text-gray-400 hover:text-white transition"
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden text-gray-400 hover:text-white p-2 -ml-2"
+              aria-label="Open sidebar"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <h1 className="text-white font-semibold">Dashboard</h1>
+          </div>
+          <div className="flex items-center gap-2 md:gap-4">
+            <button
+              className="text-gray-400 hover:text-white transition hidden md:block"
               aria-label="View notifications"
             >
               🔔
@@ -188,7 +250,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Page Content */}
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           {children}
         </div>
       </main>
