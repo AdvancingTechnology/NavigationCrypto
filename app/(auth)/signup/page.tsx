@@ -46,28 +46,40 @@ export default function SignUpPage() {
 
     setLoading(true)
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-      },
-    })
+    try {
+      // Use API route to create user with email pre-verified
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, fullName }),
+      })
 
-    if (signUpError) {
-      setError(signUpError.message)
+      const result = await response.json()
+
+      if (!response.ok) {
+        setError(result.error || 'Failed to create account')
+        setLoading(false)
+        return
+      }
+
+      // Now sign in the user
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (signInError) {
+        setError(signInError.message)
+        setLoading(false)
+        return
+      }
+
+      router.push('/dashboard')
+      router.refresh()
+    } catch (err) {
+      setError('An unexpected error occurred')
       setLoading(false)
-      return
     }
-
-    // Profile is automatically created by database trigger (handle_new_user)
-    // when the user signs up - no manual insert needed
-    // New users get 'user' role by default, so redirect to user dashboard
-
-    router.push('/dashboard')
-    router.refresh()
   }
 
   return (
