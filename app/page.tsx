@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Globe Icon Component (matching the logo)
 function GlobeIcon({ className = "w-10 h-10" }: { className?: string }) {
@@ -55,6 +55,24 @@ function CircuitLines({ position }: { position: "top" | "bottom" }) {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <div className="min-h-screen bg-black relative">
@@ -83,6 +101,7 @@ export default function Home() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-white p-2"
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
             >
               <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                 {mobileMenuOpen ? (
@@ -97,7 +116,7 @@ export default function Home() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-800 bg-black/95 backdrop-blur-md">
+          <div className="md:hidden border-t border-gray-800 bg-black/95 backdrop-blur-md" ref={mobileMenuRef}>
             <div className="px-4 py-4 space-y-3">
               <Link
                 href="#features"

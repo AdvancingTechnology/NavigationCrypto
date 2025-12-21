@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 // Globe Icon Component
@@ -37,6 +37,25 @@ export default function DashboardLayout({
   const supabase = useMemo(() => createClient(), []);
   const [user, setUser] = useState<{ email?: string; full_name?: string } | null>(null);
   const [showMenu, setShowMenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -122,7 +141,7 @@ export default function DashboardLayout({
               🔔
             </button>
             {/* User Menu */}
-            <div className="relative">
+            <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 className="flex items-center gap-2 hover:bg-gray-800 rounded-lg px-2 py-1 transition"

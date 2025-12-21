@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { Profile } from "@/lib/supabase/types";
 
@@ -11,7 +11,8 @@ interface NotificationPreferences {
 }
 
 export default function SettingsPage() {
-  const supabase = createClient();
+  // Memoize the Supabase client to avoid recreating on every render
+  const supabase = useMemo(() => createClient(), []);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(true);
@@ -65,8 +66,7 @@ export default function SettingsPage() {
     };
 
     loadProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [supabase]);
 
   const handleSave = async () => {
     if (!profile) return;

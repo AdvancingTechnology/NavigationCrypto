@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { Course, CourseLesson, UserProgress } from "@/lib/supabase/types";
 
@@ -13,7 +13,8 @@ interface CourseWithProgress {
 }
 
 export default function ProgressPage() {
-  const supabase = createClient();
+  // Memoize the Supabase client to avoid recreating on every render
+  const supabase = useMemo(() => createClient(), []);
   const [coursesInProgress, setCoursesInProgress] = useState<CourseWithProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -132,8 +133,7 @@ export default function ProgressPage() {
     };
 
     loadProgress();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [supabase]);
 
   const toggleLessonComplete = async (
     courseId: string,

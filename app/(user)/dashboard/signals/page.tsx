@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { Signal } from "@/lib/supabase/types";
 
 export default function SignalsPage() {
-  const supabase = createClient();
+  // Memoize the Supabase client to avoid recreating on every render
+  const supabase = useMemo(() => createClient(), []);
   const [signals, setSignals] = useState<Signal[]>([]);
   const [filteredSignals, setFilteredSignals] = useState<Signal[]>([]);
   const [selectedPair, setSelectedPair] = useState<string>("all");
@@ -63,8 +64,7 @@ export default function SignalsPage() {
     return () => {
       supabase.removeChannel(channel);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     if (selectedPair === "all") {
