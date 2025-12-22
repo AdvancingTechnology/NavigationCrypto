@@ -216,9 +216,9 @@ Paid tier only needed when subscriber base exceeds ~1,000 active users.
 
 ## Contact
 
-**Technical Questions**: Elijah Brown (CTO)
-**Business Questions**: [CEO Name]
-**Investment Questions**: [Investor Name]
+**Technical Questions**: Eli (CTO)
+**Business Questions**: TBD
+**Investment Questions**: TBD
 
 ---
 
