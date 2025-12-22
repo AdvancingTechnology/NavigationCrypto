@@ -29,6 +29,7 @@ const navItems = [
   { href: "/admin/analytics", label: "Analytics", icon: "📉" },
   { href: "/admin/ai-agents", label: "AI Agents", icon: "🤖" },
   { href: "/admin/support", label: "Support", icon: "💬" },
+  { href: "/admin/reports", label: "Reports", icon: "📄" },
 ];
 
 export default function AdminLayout({
