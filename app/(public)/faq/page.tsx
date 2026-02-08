@@ -18,7 +18,7 @@ const faqs: FAQ[] = [
   {
     category: "Getting Started",
     question: "Is there a free plan?",
-    answer: "Yes! Our free plan includes access to basic educational content, limited trading signals (5 per week), and community features. Upgrade to Pro or Enterprise for unlimited signals, advanced courses, and exclusive features."
+    answer: "Yes! Our free plan includes access to beginner courses, 3 trading signals per week, and read-only community access. Upgrade to Pro ($99/mo or $997/yr) for the full community experience, unlimited signals, and all courses — or Enterprise ($249/mo or $2,497/yr) for our proprietary indicator, 1-on-1 coaching with Travis, and VIP access."
   },
   {
     category: "Getting Started",
@@ -79,7 +79,7 @@ const faqs: FAQ[] = [
   {
     category: "Billing",
     question: "What's the difference between Pro and Enterprise plans?",
-    answer: "Pro includes unlimited signals, all courses, copy trading, and priority support. Enterprise adds dedicated account management, custom signals, API access, team accounts (up to 10 users), and white-label options for businesses."
+    answer: "Pro ($99/mo or $997/yr) gives you the full community, unlimited signals, all courses, advanced analytics, and weekly live trading sessions. Enterprise ($249/mo or $2,497/yr) adds our proprietary indicator & plugin, 1-on-1 coaching sessions with Travis, copy trading, custom AI agents, API access, and a dedicated account manager. Both plans offer annual pricing with significant savings."
   },
 
   // Account

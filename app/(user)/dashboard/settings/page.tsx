@@ -155,25 +155,25 @@ export default function SettingsPage() {
     const features = {
       free: [
         'Access to beginner courses',
-        'View active trading signals',
-        'Basic analytics',
-        'Community access',
+        '3 trading signals per week',
+        'Basic market data',
+        'Community read-only access',
       ],
       pro: [
-        'All free features',
-        'Access to all courses',
-        'Priority signal alerts',
-        'Advanced analytics',
-        'AI-powered insights',
-        '1-on-1 support',
+        'Full community access & chat',
+        'Unlimited trading signals',
+        'All courses & webinars',
+        'Advanced analytics & charts',
+        'AI-powered market insights',
+        'Weekly live trading sessions',
       ],
       enterprise: [
-        'All pro features',
-        'Custom AI agents',
-        'Dedicated account manager',
-        'White-label options',
-        'API access',
-        'Custom integrations',
+        'Everything in Pro',
+        'Proprietary indicator & plugin access',
+        '1-on-1 coaching with Travis',
+        'Copy trading access',
+        'Custom AI trading agents',
+        'API access & dedicated manager',
       ],
     };
     return features[plan as keyof typeof features] || features.free;
@@ -298,8 +298,8 @@ export default function SettingsPage() {
                 </h4>
                 <p className="text-gray-400 text-sm mb-3">
                   {profile.plan === 'free'
-                    ? 'Get access to all courses, priority signals, and AI-powered insights.'
-                    : 'Get custom AI agents, dedicated support, and API access.'}
+                    ? 'Get full community access, unlimited signals, all courses, and live trading sessions — $99/mo or $997/yr.'
+                    : 'Get our proprietary indicator, 1-on-1 coaching with Travis, copy trading, and VIP access — $249/mo or $2,497/yr.'}
                 </p>
                 <button
                   onClick={() => alert('Pricing page coming soon! Contact support@navigationcrypto.com for upgrade inquiries.')}

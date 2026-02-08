@@ -46,10 +46,10 @@ Once incorporated with banking, Stripe can be activated.
 | Subscription Billing | **+0.5% of recurring** |
 | ACH/Bank Transfer | **0.8%** (max $5) |
 
-**Example Revenue Calculation** (100 Pro subscribers @ $29/mo):
-- Gross: $2,900/month
-- Stripe Fees: ~$100/month (3.4% effective)
-- Net: ~$2,800/month
+**Example Revenue Calculation** (25 Pro + 5 Enterprise @ new pricing):
+- Gross: $3,720/month ($2,475 Pro + $1,245 Enterprise)
+- Stripe Fees: ~$126/month (3.4% effective)
+- Net: ~$3,594/month
 
 **Action Required**:
 - [ ] Trav to complete Stripe account setup (needs LLC + bank account)
@@ -160,23 +160,35 @@ Paid tier only needed when subscriber base exceeds ~1,000 active users.
 
 ## Revenue Projections
 
-### Pricing Tiers (Set in Platform)
+### Pricing Tiers (Updated Feb 2026)
 
-| Plan | Price | Features |
-|------|-------|----------|
-| Free | $0 | Basic signals, limited courses |
-| Pro | $29/mo | All signals, all courses, priority support |
-| Enterprise | $99/mo | Everything + API access + 1-on-1 coaching |
+Community access was previously $1,500 one-time. With the addition of the proprietary indicator/plugin and increased demand, the platform now uses a subscription model with raised pricing to reflect the added value.
+
+| Plan | Monthly | Annual | Features |
+|------|---------|--------|----------|
+| Free | $0 | $0 | 3 signals/week, beginner courses, read-only community |
+| Pro | $99/mo | $997/yr | Full community, unlimited signals, all courses, live sessions |
+| Enterprise | $249/mo | $2,497/yr | Everything + proprietary indicator/plugin, 1-on-1 coaching with Travis, copy trading, API |
 
 ### Break-Even Analysis
 
 | Subscribers Needed | Revenue | After Stripe | Covers |
 |--------------------|---------|--------------|--------|
-| 2 Pro | $58/mo | $56/mo | API costs |
-| 10 Pro | $290/mo | $280/mo | All monthly ops |
-| 35 Pro | $1,015/mo | $980/mo | Annual LLC + monthly |
+| 1 Pro | $99/mo | $96/mo | All monthly ops + API costs |
+| 3 Pro | $297/mo | $287/mo | Annual LLC + all monthly ops |
+| 5 Pro | $495/mo | $478/mo | All costs + profit margin |
+| 1 Enterprise | $249/mo | $240/mo | Covers everything solo |
 
-**Break-even**: ~10 Pro subscribers covers all operational costs.
+### Revenue Scenarios (Monthly)
+
+| Scenario | Pro Subs | Enterprise Subs | Gross | Net (after Stripe) |
+|----------|----------|-----------------|-------|-------------------|
+| Launch | 10 | 1 | $1,239 | $1,197 |
+| Growth | 25 | 5 | $3,720 | $3,594 |
+| Scale | 50 | 15 | $8,685 | $8,390 |
+| Mature | 100 | 30 | $17,370 | $16,780 |
+
+**Break-even**: Just 1 Pro subscriber covers all monthly operational costs.
 
 ---
 

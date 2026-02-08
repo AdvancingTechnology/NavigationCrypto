@@ -6,64 +6,65 @@ export default function PricingPage() {
       name: "Free",
       price: "$0",
       period: "forever",
-      description: "Perfect for getting started with crypto trading",
+      description: "Preview what Navigating Crypto has to offer",
       features: [
         "Access to beginner courses",
-        "View active trading signals",
-        "Basic portfolio analytics",
-        "Community access",
-        "Email support",
+        "3 trading signals per week",
         "Basic market data",
+        "Community read-only access",
+        "Email support",
       ],
       cta: "Get Started",
       href: "/signup",
       highlighted: false,
       badge: null,
+      annual: null,
     },
     {
       name: "Pro",
-      price: "$29",
+      price: "$99",
       period: "per month",
-      description: "For serious traders who want the full experience",
+      description: "Full community access, signals, and education for serious traders",
       features: [
         "All free features",
-        "Access to all courses",
-        "Priority signal alerts",
+        "Full community access & chat",
+        "Unlimited trading signals",
+        "Access to all courses & webinars",
         "Advanced analytics & charts",
-        "AI-powered insights",
-        "1-on-1 support",
-        "Copy trading access",
-        "Real-time notifications",
-        "Portfolio tracking",
-        "Educational webinars",
+        "AI-powered market insights",
+        "Real-time signal notifications",
+        "Portfolio tracking tools",
+        "Priority email & chat support",
+        "Weekly live trading sessions",
       ],
-      cta: "Start Pro Trial",
+      cta: "Join Pro",
       href: "/signup?plan=pro",
       highlighted: true,
       badge: "Most Popular",
+      annual: "$997/yr (save $191)",
     },
     {
       name: "Enterprise",
-      price: "$99",
+      price: "$249",
       period: "per month",
-      description: "Custom solutions for teams and institutions",
+      description: "The full arsenal — proprietary indicator, 1-on-1 coaching, and VIP access",
       features: [
-        "All pro features",
-        "Custom AI agents",
+        "Everything in Pro",
+        "Proprietary indicator & plugin access",
+        "1-on-1 coaching sessions with Travis",
+        "Copy trading access",
+        "Custom AI trading agents",
         "Dedicated account manager",
-        "White-label options",
-        "API access",
-        "Custom integrations",
+        "API access & custom integrations",
+        "Private VIP signal channel",
         "Priority support 24/7",
-        "Custom training programs",
-        "Advanced reporting",
-        "Team collaboration tools",
-        "Institutional-grade security",
+        "Early access to new tools & features",
       ],
-      cta: "Contact Sales",
-      href: "/support",
+      cta: "Go Enterprise",
+      href: "/signup?plan=enterprise",
       highlighted: false,
-      badge: null,
+      badge: "VIP",
+      annual: "$2,497/yr (save $491)",
     },
   ];
 
@@ -112,6 +113,9 @@ export default function PricingPage() {
                 <span className="text-5xl font-bold text-white">{plan.price}</span>
                 <span className="text-gray-500">/ {plan.period}</span>
               </div>
+              {plan.annual && (
+                <p className="text-cyan-400 text-sm mt-2 font-medium">{plan.annual}</p>
+              )}
             </div>
 
             {/* Features */}
@@ -156,7 +160,7 @@ export default function PricingPage() {
             {
               question: "Is there a free trial for Pro?",
               answer:
-                "Yes, we offer a 7-day free trial for the Pro plan. No credit card required to start.",
+                "We offer a 14-day money-back guarantee on all paid plans. Try risk-free — if it's not for you within 14 days, get a full refund.",
             },
             {
               question: "What payment methods do you accept?",
@@ -171,7 +175,12 @@ export default function PricingPage() {
             {
               question: "What's included in the Enterprise plan?",
               answer:
-                "Enterprise plans are customized to your needs. Contact our sales team to discuss your requirements and get a custom quote.",
+                "Enterprise includes everything in Pro plus our proprietary trading indicator & plugin, 1-on-1 coaching sessions with Travis, copy trading, custom AI agents, API access, and a dedicated account manager. It's the full VIP experience.",
+            },
+            {
+              question: "Why is the pricing higher than other platforms?",
+              answer:
+                "We're not a mass-market newsletter. You get direct access to our proprietary indicator, live trading sessions, 1-on-1 coaching, and a proven community of serious traders. The value our members extract far exceeds the investment.",
             },
           ].map((faq, index) => (
             <div
